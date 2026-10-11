@@ -1,0 +1,24 @@
+{
+  "check": "C# syntax parsing and project XML/reference inspection only",
+  "compiler_run": false,
+  "unit_tests_run": false,
+  "gui_run": false,
+  "csharp_files": [
+    "source/PageReplacement.Cli/Experiments.cs",
+    "source/PageReplacement.Cli/Program.cs",
+    "source/PageReplacement.Core/CsvFiles.cs",
+    "source/PageReplacement.Core/Simulator.cs",
+    "source/PageReplacement.WinForms/CurveView.cs",
+    "source/PageReplacement.WinForms/MainForm.cs",
+    "source/PageReplacement.WinForms/Program.cs",
+    "tests/PageReplacement.Tests/Program.cs"
+  ],
+  "project_files": [
+    "source/PageReplacement.Cli/PageReplacement.Cli.csproj",
+    "source/PageReplacement.Core/PageReplacement.Core.csproj",
+    "source/PageReplacement.WinForms/PageReplacement.WinForms.csproj",
+    "tests/PageReplacement.Tests/PageReplacement.Tests.csproj"
+  ],
+  "syntax_errors": 0,
+  "limitation": "Tree-sitter parsing does not verify type checking, .NET API compatibility, nullable warnings, or runtime behavior."
+}
