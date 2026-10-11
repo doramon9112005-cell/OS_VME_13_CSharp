@@ -18,4 +18,4 @@ Ngày kiểm tra nguồn trực tuyến: 10/10/2026. Dùng cùng số trích d�
 
 [8] Microsoft Learn, NETSDK1100 và EnableWindowsTargeting. https://learn.microsoft.com/en-us/dotnet/core/tools/sdk-errors/netsdk1100 . Phân biệt khả năng cross-build với chạy WinForms trên Windows.
 
-Không đính kèm lại slide gốc trong project. Không sử dụng benchmark hay log Python trước đây như bằng chứng thực thi C#.
+Tài liệu slide gốc được sử dụng để đối chiếu lý thuyết và các ví dụ; không đính kèm trong mã nguồn.

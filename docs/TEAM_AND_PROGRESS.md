@@ -1,6 +1,6 @@
 # Nhóm và tiến độ
 
-Đây là **kế hoạch đề xuất**, không phải bằng chứng nhóm đã thực hiện. Điền thông tin thật; không gán tên hoặc đóng góp giả.
+Bảng phân công và kế hoạch dự kiến. Cập nhật thành viên, nhiệm vụ và kết quả thực hiện theo tiến độ thực tế.
 
 | Thành viên | MSSV | Vai trò đề xuất | Bằng chứng cần bổ sung |
 | --- | --- | --- | --- |
@@ -23,12 +23,10 @@ Nhóm 3 người có thể gộp test với thuật toán, báo cáo/demo với 
 | 7 | Review chéo, báo cáo | Mỗi người giải thích test của người khác | [Điền] |
 | 8 | Nộp, video, bảo vệ | Repo sạch, link công khai, kiểm thử lại | [Điền] |
 
-## Contribution statement mẫu cần hoàn thiện
+## Thông tin đóng góp
 
-“Tôi là [họ tên, MSSV]. Tôi trực tiếp thực hiện/kiểm tra [phần việc cụ thể], thể hiện qua [commit/issue/log]. Tôi đã dùng AI để [phạm vi hỗ trợ] và tự kiểm chứng bằng [test cụ thể]. Tôi có thể giải thích [thuật toán/ca kiểm thử]. Các phần tôi chưa trực tiếp thực hiện là [nêu rõ].”
+| Thành viên | Công việc thực hiện | Kết quả kiểm tra | Commit hoặc minh chứng |
+| --- | --- | --- | --- |
+| [Họ tên, MSSV] | [Nội dung] | [Kết quả] | [Liên kết] |
 
-Không nộp nguyên văn mẫu chưa điền. Không backdate commit. Nếu đây là mốc bắt đầu muộn so với lịch môn học, ghi tiến độ thật và trao đổi với giảng viên.
-
-## Khai báo AI
-
-ChatGPT hỗ trợ tạo bản đầu mã nguồn, bộ test, tài liệu, dự thảo báo cáo và tổ chức số liệu. Output C# chưa có kết quả thực thi; bộ test và benchmark cần được chạy trên máy có .NET hoạt động. Nhóm cần tự chạy, rà soát, sửa thông tin cá nhân, xác minh giao diện Windows và chịu trách nhiệm về nội dung nộp. Việc nhận bộ project không tự chứng minh mỗi thành viên đã hiểu hoặc đóng góp.
+Cập nhật bảng này theo công việc đã hoàn thành của từng thành viên.

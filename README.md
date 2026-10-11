@@ -1,6 +1,6 @@
 # OS_VME_13 — C# Windows Forms
 
-Project **C# / .NET 8 / Windows Forms** mô phỏng FIFO, LRU, OPT và Second-Chance (Clock). Toàn bộ mã ứng dụng, CLI, kiểm thử và benchmark đều viết bằng C#. Không cần Python; không có gói NuGet bên thứ ba.
+Project **C# / .NET 8 / Windows Forms** mô phỏng FIFO, LRU, OPT và Second-Chance (Clock). Toàn bộ mã ứng dụng, CLI, kiểm thử và benchmark đều viết bằng C#. Không sử dụng gói NuGet bên thứ ba.
 
 ## Mở và chạy trên Windows
 
@@ -22,13 +22,11 @@ dotnet run --project source/PageReplacement.WinForms -c Release
 
 GUI chỉ chạy trên Windows. Thư viện Core, CLI và test runner target `net8.0` và được thiết kế chạy đa nền tảng. `EnableWindowsTargeting` chỉ cho phép build dự án Windows từ máy khác; không làm WinForms chạy được trên Linux. Restore/build lần đầu có thể cần internet để lấy targeting pack.
 
-## Trạng thái kiểm chứng quan trọng
+## Trạng thái kiểm thử
 
-**Cập nhật từ log người dùng ngày 10/10/2026:** test Core/CSV đã chạy **25/25 PASS** trên Windows. Build WinForms báo CS0108 vì hàm `Layout` trùng tên sự kiện `Control.Layout`; bản cập nhật đã đổi tên hàm và cả bốn chỗ gọi thành `CreateTableLayout`. Chưa có kết quả build/GUI sau sửa. Trạng thái chưa chạy trong báo cáo Word phản ánh thời điểm bàn giao ban đầu; dùng cập nhật này làm trạng thái mới nhất.
+Bộ kiểm thử Core/CSV đạt **25/25 PASS** theo log chạy trên Windows ngày 10/10/2026. Hàm tạo bố cục WinForms đã được đổi tên thành `CreateTableLayout` để khắc phục lỗi CS0108. Kết quả build và nghiệm thu GUI sau sửa chưa được xác nhận; số đo benchmark chưa được bổ sung.
 
-Mã C# đã được rà soát và phân tích cú pháp, nhưng **chưa biên dịch/chưa chạy test C# trong môi trường bàn giao**, vì CoreCLR không khởi động (`0x8007000E`). Không coi mã đã viết là đã PASS. Không chuyển log hoặc thời gian benchmark Python cũ sang bản C#.
-
-`output/VALIDATION_STATUS.md` ghi trạng thái. Các tệp actual/performance sẽ được tạo bằng lệnh dưới đây trên máy bạn. Trước nộp cần build thành công, chạy test và nghiệm thu GUI theo `docs/WINDOWS_ACCEPTANCE.md`.
+Chi tiết tại `output/VALIDATION_STATUS.md`. Quy trình nghiệm thu giao diện được liệt kê trong `docs/WINDOWS_ACCEPTANCE.md`.
 
 ## Các chức năng
 
@@ -80,9 +78,9 @@ dotnet run --project source/PageReplacement.Cli -c Release -- simulate input/tex
 dotnet run --project source/PageReplacement.WinForms -c Release -- --smoke
 ```
 
-`test_windows.bat` chạy test core/CSV rồi smoke test WinForms và dừng nếu lỗi. Runner trả exit 1 khi assertion không đạt, CLI trả exit 2 với input không hợp lệ. Test runner ghi `output/test_results.csv` và `test_environment.json`; GUI smoke ghi `gui_smoke.txt` cùng ảnh thật `gui_smoke.png` nếu thành công. Có 25 nhóm test, bao gồm 100 chuỗi ngẫu nhiên so oracle độc lập, 3276 cặp input/frame vét cạn OPT, stress 200000 lần truy cập cả khi hit nhiều và miss hoàn toàn. Đây là phạm vi test đã viết, chưa phải kết quả đã chạy.
+`test_windows.bat` chạy test core/CSV rồi smoke test WinForms và dừng nếu lỗi. Runner trả exit 1 khi assertion không đạt, CLI trả exit 2 với input không hợp lệ. Test runner ghi `output/test_results.csv` và `test_environment.json`; GUI smoke ghi `gui_smoke.txt` cùng ảnh thật `gui_smoke.png` nếu thành công. Có 25 nhóm test, bao gồm 100 chuỗi ngẫu nhiên so oracle độc lập, 3276 cặp input/frame vét cạn OPT, stress 200000 lần truy cập cả khi hit nhiều và miss hoàn toàn. Bộ test Core/CSV đã đạt 25/25 PASS; smoke test WinForms được đánh giá riêng.
 
-Mốc expected trong slide ch10: chuỗi 22 tham chiếu, f=3 → **FIFO 15, LRU 12, OPT 9**. Clock theo quy ước project expected **14**. Belady với FIFO: f=3 → 9, f=4 → 10. Các expected là oracle, không phải bằng chứng C# đã đạt.
+Mốc expected trong slide ch10: chuỗi 22 tham chiếu, f=3 → **FIFO 15, LRU 12, OPT 9**. Clock theo quy ước project expected **14**. Belady với FIFO: f=3 → 9, f=4 → 10. Các mốc expected dùng để đối chiếu với kết quả thực thi.
 
 ## Benchmark
 
@@ -95,11 +93,11 @@ dotnet run --project source/PageReplacement.Cli -c Release -- benchmark output
 
 Benchmark dùng LCG32 seed13 (mã generator đi kèm), ba workload Uniform/Locality/Cyclic scan; n=1000/10000/100000; f=16. Ba warmup và năm lần đo, ghi median/min/max. `Stopwatch` đo thời gian; lượt riêng dùng `GC.GetAllocatedBytesForCurrentThread` đo **tổng byte được cấp phát**, không phải peak RAM/RSS. Input, GUI và CSV không nằm trong phép đo; validation/tiền xử lý OPT có nằm trong phép đo. `trace_memory.csv` so tổng cấp phát trace bật/tắt. Mã hash input và môi trường .NET được lưu để tái lập.
 
-Sau chạy, đưa số đo C# vào phần 7–8 của báo cáo và điền trạng thái kiểm thử. Không sử dụng benchmark Python cũ như số đo C#.
+Kết quả benchmark được lưu trong `output/performance.csv`, `output/trace_memory.csv` và `output/benchmark_environment.json`. Sử dụng các tệp này để phân tích hiệu năng trong báo cáo.
 
 ## Tạo EXE
 
-Nhấp đúp `publish_windows.bat` để publish **Windows x64 self-contained**. EXE được tạo tại `publish/win-x64/PageReplacement.exe`, dự kiến không cần cài .NET Runtime trên máy nhận. Bước này cần SDK và có thể cần mạng để tải runtime pack. **Gói bàn giao chưa có EXE đã build**, chưa được xác nhận khả năng chạy trên máy đích.
+Nhấp đúp `publish_windows.bat` để publish **Windows x64 self-contained**. EXE được tạo tại `publish/win-x64/PageReplacement.exe`, dự kiến không cần cài .NET Runtime trên máy nhận. Bước này cần SDK và có thể cần mạng để tải runtime pack. EXE cần được tạo bằng lệnh publish và kiểm tra trên máy đích.
 
 ## Cấu trúc solution
 
@@ -114,8 +112,15 @@ Nhấp đúp `publish_windows.bat` để publish **Windows x64 self-contained**.
 | report | Báo cáo Word C# |
 | docs | Pseudocode, sơ đồ, Q1–Q6, checklist, nghiệm thu, phân công, demo |
 
-## Git và các bước còn lại
+## Tài liệu và dữ liệu kết quả
 
-Bản Source Clean chỉ chứa mã nguồn, dữ liệu mẫu và tài liệu. Không có thư mục .git, file .bundle, cấu hình .github hay lịch sử commit đi kèm. Giải nén rồi đưa các tệp bên trong thư mục OS_VME_13_CSharp lên repository của bạn. Các thư mục bin/obj/.vs sinh ra khi chạy trên máy cũng không cần đưa lên repository. Repo từ xa và video chưa được đăng.
+- `report/Bao_cao_OS_VME_13_CSharp.docx`: báo cáo đề tài.
+- `docs/ALGORITHMS.md`: mô hình, giả mã và ví dụ truy vết.
+- `docs/ARCHITECTURE.md`: kiến trúc chương trình.
+- `docs/DEMO_GUIDE.md`: trình tự trình diễn chức năng.
+- `docs/TEAM_AND_PROGRESS.md`: bảng phân công và kế hoạch tiến độ.
+- `output/`: kết quả kiểm thử, xuất CSV và benchmark được tạo khi thực thi các lệnh tương ứng.
 
-Trước nộp: build/test trên Windows; ghi số đo C#; điền thành viên, MSSV, lớp, giảng viên, đóng góp thật; thêm link repo/video. Bạn tự quay video; `docs/DEMO_GUIDE.md` có trình tự gợi ý. AI hỗ trợ tạo bản đầu, nhóm phải tự chạy lại và giải thích được mã nguồn.
+## Đưa mã nguồn lên repository
+
+Giải nén và đưa nội dung thư mục chứa `OS_VME_13.sln` lên repository. Không đưa các thư mục phát sinh `bin`, `obj`, `.vs` hoặc bản publish vào mã nguồn. Gói source không kèm kho Git hay file bundle.

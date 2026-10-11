@@ -1,6 +1,6 @@
-# Hướng dẫn tự quay demo
+# Hướng dẫn trình diễn
 
-Bạn tự quay và đăng video. Khung dưới đây gợi ý 5–7 phút, có thể điều chỉnh theo yêu cầu giảng viên; không phải thời lượng bắt buộc trong tài liệu gốc.
+Trình tự trình diễn tham khảo trong 5–7 phút; thời lượng có thể điều chỉnh theo yêu cầu môn học.
 
 | Thời điểm gợi ý | Thao tác trên màn hình | Ý chính cần giải thích |
 | --- | --- | --- |
@@ -11,6 +11,6 @@ Bạn tự quay và đăng video. Khung dưới đây gợi ý 5–7 phút, có 
 | 3:30–4:20 | Belady; curve tới 5 | Thêm frame không luôn giảm fault với FIFO |
 | 4:20–5:10 | Xuất CSV, mở summary/trace; thử input lỗi | Tái lập, kiểm tra dữ liệu, không crash |
 | 5:10–6:00 | Chạy test_windows.bat; sau benchmark mở performance.csv | Expected/actual, stress, seed, đo thật; trình bày log C# đã chạy thực tế |
-| 6:00–7:00 | Giới thiệu repo, phân công và giới hạn | Đóng góp thật, AI, chưa mô phỏng TLB/dirty/I/O |
+| 6:00–7:00 | Giới thiệu repo, phân công và giới hạn | Phân công thực hiện; giới hạn mô hình TLB/dirty/I/O |
 
 Trước quay: build/test bản C# và sinh evidence/benchmark; điền thông tin nhóm, chạy nghiệm thu Windows, tăng cỡ chữ Terminal, tắt thông báo riêng tư và dùng dữ liệu mẫu. Sau đăng: thử link khi không đăng nhập và điền URL vào báo cáo/README. Không đọc toàn bộ mã nguồn trong video; chọn một ca kiểm thử và giải thích quyết định chọn victim.

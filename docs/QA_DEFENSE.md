@@ -1,6 +1,6 @@
 # Q1 đến Q6 và chuẩn bị bảo vệ
 
-Trạng thái bản C#: mã và test đã viết, chưa biên dịch/thực thi do môi trường CoreCLR không khởi động. Các mốc dưới đây là expected/oracle và nội dung test, không phải xác nhận PASS.
+Core/CSV đạt 25/25 PASS theo log kiểm thử trên Windows ngày 10/10/2026. GUI sau sửa lỗi CS0108 và benchmark cần được nghiệm thu riêng.
 
 ## Q1 Bài toán và mô hình
 
@@ -16,7 +16,7 @@ Oracle slide 22 tham chiếu/3 frame cho FIFO 15, LRU 12, OPT 9. Test tính tay 
 
 ## Q4 Thiết kế và truy vết
 
-Core không import Windows Forms. GUI chụp input khi nhấn chạy, Task.Run tính toán và UI thread cập nhật control sau await. CSV xuất state sau từng bước; bảng giữ slot vật lý cố định. So sánh dùng cùng chuỗi, cùng f và cold start cho bốn chính sách. Các file input/output và CLI giúp tái lập không cần GUI. Kiểm tra Windows thủ công vẫn là một gate chưa hoàn thành trong môi trường tạo project.
+Core không import Windows Forms. GUI chụp input khi nhấn chạy, Task.Run tính toán và UI thread cập nhật control sau await. CSV xuất state sau từng bước; bảng giữ slot vật lý cố định. So sánh dùng cùng chuỗi, cùng f và cold start cho bốn chính sách. Các file input/output và CLI giúp tái lập không cần GUI. Các thao tác giao diện được kiểm tra theo docs/WINDOWS_ACCEPTANCE.md.
 
 ## Q5 Chỉ số và độ phức tạp
 
@@ -24,7 +24,7 @@ Fault rate=F/n; hit rate=H/n; H+F=n; replacement không gồm nạp ban đầu. 
 
 ## Q6 Nhóm, kiểm thử và giới hạn
 
-Có kế hoạch 8 tuần và bảng phân vai đề xuất, chưa có tên/đóng góp/commit tuần thực tế. Mã C# và test đã được viết với AI hỗ trợ nhưng chưa biên dịch/thực thi trong môi trường bàn giao; mỗi thành viên cần tự kiểm tra và giải thích phần đã nhận. Benchmark ba workload, ba kích thước, LCG32 seed13, ba warmup, năm lần đo; môi trường lưu JSON. Stress đến 200000 cho cả chuỗi vừa bộ nhớ và chuỗi mọi tham chiếu đều miss. Giới hạn: một tiến trình, không dirty bit/TLB/page size/cấp frame động; GUI bị giới hạn để kiểm soát lượng trace. Có thể cải tiến stream CSV, pagination GUI và thêm I/O cost sau khi thống nhất với giảng viên.
+Kế hoạch 8 tuần và bảng phân công nằm trong docs/TEAM_AND_PROGRESS.md. Mỗi hạng mục được đối chiếu với kết quả kiểm thử, commit và nội dung báo cáo tương ứng. Benchmark ba workload, ba kích thước, LCG32 seed13, ba warmup, năm lần đo; môi trường lưu JSON. Stress đến 200000 cho cả chuỗi vừa bộ nhớ và chuỗi mọi tham chiếu đều miss. Giới hạn: một tiến trình, không dirty bit/TLB/page size/cấp frame động; GUI bị giới hạn để kiểm soát lượng trace. Có thể cải tiến stream CSV, pagination GUI và thêm I/O cost sau khi thống nhất với giảng viên.
 
 ## Câu hỏi ngắn dễ gặp
 

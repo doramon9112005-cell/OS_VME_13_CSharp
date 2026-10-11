@@ -1,19 +1,18 @@
-# Trạng thái xác minh bản C#
+# Trạng thái kiểm chứng
 
-## Cập nhật theo log người dùng ngày 10/10/2026
+| Hạng mục | Kết quả |
+| --- | --- |
+| Core và CSV | 25/25 nhóm test PASS theo log console chạy trên Windows ngày 10/10/2026 |
+| Phạm vi kiểm thử | Oracle slide, Clock, Belady, 100 chuỗi ngẫu nhiên, 3276 ca vét cạn OPT, stress 200000 tham chiếu, CSV và snapshot |
+| WinForms | Đã đổi Layout thành CreateTableLayout để sửa CS0108; chưa xác nhận build và smoke test sau sửa |
+| Benchmark | Chưa có số đo thực thi |
+| Phân tích cú pháp | 8 tệp C# không có lỗi cú pháp theo bộ phân tích; không thay thế kiểm tra biên dịch |
 
-- Core/CSV: **25/25 PASS** theo log console người dùng gửi; bao gồm kiểm thử oracle, vét cạn OPT và stress.
-- WinForms: build dừng với CS0108 tại hàm `MainForm.Layout(int, int)`.
-- Đã sửa bằng cách đổi tên hàm và bốn chỗ gọi thành `CreateTableLayout`; giữ `TreatWarningsAsErrors=true`.
-- Chưa nhận kết quả build/smoke test GUI sau sửa; chưa có benchmark.
-- Đây là kết quả người dùng cung cấp, không phải test chạy trong môi trường tạo project.
+## Tái lập
 
-## Trạng thái lúc bàn giao ban đầu
+1. Chạy `test_windows.bat` để kiểm thử Core/CSV và smoke test WinForms.
+2. Chạy lệnh `evidence` trong README để tạo bảng expected/actual và trace.
+3. Chạy `benchmark_windows.bat` để đo hiệu năng.
+4. Hoàn thành `docs/WINDOWS_ACCEPTANCE.md` để nghiệm thu các thao tác GUI.
 
-- Mã nguồn đã được rà soát và đối chiếu với quy ước thuật toán/CSV.
-- .NET SDK 8.0.425 tải từ Microsoft, kiểm tra SHA-512 thành công.
-- Host nhận SDK nhưng CoreCLR không khởi động trong môi trường tạo project: `Failed to create CoreCLR, HRESULT: 0x8007000E`.
-- Chưa biên dịch C#, chưa chạy test runner C#, chưa đo benchmark C#, chưa chạy GUI Windows.
-- Không có tệp PASS/actual/performance giả; output được sinh khi bạn chạy các lệnh trong README.
-- Test runner C# gồm 25 nhóm test, oracle độc lập và 3276 trường hợp vét cạn OPT; đó là phạm vi đã viết, chưa phải kết quả đã thực thi.
-- Cấu hình GitHub Actions đi kèm nhưng chưa chạy từ xa.
+Log được cung cấp xác nhận Core/CSV; chưa có tệp kết quả máy chạy kèm theo. Các tệp CSV/JSON kết quả sẽ được tạo bởi các lệnh trên. Báo cáo Word hiện phản ánh trạng thái kiểm chứng tại thời điểm soạn ban đầu; cần cập nhật phần kết quả theo lần chạy nghiệm thu cuối.
