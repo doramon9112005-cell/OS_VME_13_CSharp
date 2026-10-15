@@ -93,9 +93,8 @@ public static class Simulator
                     for (int candidate = 0; candidate < capacity; candidate++)
                     {
                         var positions = future[frames[candidate]!.Value];
-                                    int next = positions[candidate].Count == 0 ? int.MaxValue : positions[candidate].Peek();
+                                   int next = positions.Count == 0 ? int.MaxValue : positions.Peek();
                         if (next > farthest) { farthest = next; slot = candidate; }
-                                    if (next == int.MaxValue) break;
                     }
                     victim = frames[slot];
                 }
